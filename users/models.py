@@ -42,4 +42,4 @@ class User(AbstractUser):
         choices=CURRENCY_CHOICES, max_length=3, null=True, blank=True
     )
 
-    sueprhost = models.BooleanField(default=False)
+    superhost = models.BooleanField(default=False)
