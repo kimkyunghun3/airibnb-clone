@@ -19,6 +19,29 @@ class AbstractItem(core_models.TimeStampedModel):
 
 class RoomType(AbstractItem):
 
+    """RoomType Model Definition"""
+
+    pass
+
+
+class Amenity(AbstractItem):
+
+    """Amenity Model Definition"""
+
+    pass
+
+
+class Facility(AbstractItem):
+
+    """Facility Model Definition"""
+
+    pass
+
+
+class HouseRule(AbstractItem):
+
+    """ HouseRule Model Definition"""
+
     pass
 
 
@@ -39,8 +62,15 @@ class Room(core_models.TimeStampedModel):
     check_in = models.TimeField()
     check_out = models.TimeField()
     instant_book = models.BooleanField(default=False)
-    host = models.ForeignKey(user_models.User, on_delete=models.CASCADE)
-    room_type = models.ManyToManyField(RoomType, blank=True)
+    host = models.ForeignKey(
+        user_models.User, on_delete=models.CASCADE
+    )  # cascade >폭포수,.. 위에서 일어난 일이 밑에도 같이 일어나게됨..(위에서 삭제하면 밑에 내용까지도 같이 삭제됨)
+    room_type = models.ForeignKey(
+        RoomType, on_delete=models.SET_NULL, null=True
+    )  # 객실 유형은 한 가지 또는 다른 유형이 되야 하므로
+    amenities = models.ManyToManyField(Amenity)
+    facilities = models.ManyToManyField(Facility)
+    house_rules = models.ManyToManyField(HouseRule)
 
     def __str__(self):
         return self.name
