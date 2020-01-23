@@ -56,9 +56,9 @@ class RoomAdmin(admin.ModelAdmin):
     )
 
     def count_amenities(self, obj):  # class 안의 함수에서 self은 class을 의미하고 obj은 admin에서 row을 의미
-        print(obj.amenities.all())
-        return "potato"
-    count_amenities.short_description = "hello sexy!"  # functionailty다. 장고에서 함수로 받아들인다
+        return obj.amenities.count()
+
+    # count_amenities.short_description = "hello sexy!"  # functionailty다. 장고에서 함수로 받아들인다
 
 
 @admin.register(models.Photo)

@@ -1,6 +1,6 @@
+from core import models as core_models
 from django.db import models
 from django_countries.fields import CountryField
-from core import models as core_models
 
 
 class AbstractItem(core_models.TimeStampedModel):
@@ -79,14 +79,17 @@ class Room(core_models.TimeStampedModel):
     check_out = models.TimeField()
     instant_book = models.BooleanField(default=False)
     host = models.ForeignKey(
-        "users.User", on_delete=models.CASCADE
+        "users.User", related_name="rooms", on_delete=models.CASCADE
     )  # cascade >폭포수,.. 위에서 일어난 일이 밑에도 같이 일어나게됨..(위에서 삭제하면 밑에 내용까지도 같이 삭제됨)
     room_type = models.ForeignKey(
-        "RoomType", on_delete=models.SET_NULL, null=True
+        "RoomType", related_name="rooms", on_delete=models.SET_NULL, null=True
     )  # 객실 유형은 한 가지 또는 다른 유형이 되야 하므로
-    amenities = models.ManyToManyField("Amenity", blank=True)
-    facilities = models.ManyToManyField("Facility", blank=True)
-    house_rules = models.ManyToManyField("HouseRule", blank=True)
+    amenities = models.ManyToManyField(
+        "Amenity", related_name="rooms", blank=True)
+    facilities = models.ManyToManyField(
+        "Facility", related_name="rooms", blank=True)
+    house_rules = models.ManyToManyField(
+        "HouseRule", related_name="rooms", blank=True)
 
     def __str__(self):
         return self.name
