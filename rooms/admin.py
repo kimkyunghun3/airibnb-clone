@@ -7,6 +7,13 @@ class ItemAdmin(admin.ModelAdmin):
 
     """Item Admin Definition"""
 
+    list_display = (
+        "name",
+        "used_by"
+    )
+
+    def used_by(self, obj):
+        return obj.rooms.count()
     pass
 
 
@@ -38,7 +45,8 @@ class RoomAdmin(admin.ModelAdmin):
         "check_in",
         "check_out",
         "instant_book",
-        "count_amenities"
+        "count_amenities",
+        'count_photos',
 
     )
 
@@ -58,6 +66,8 @@ class RoomAdmin(admin.ModelAdmin):
     def count_amenities(self, obj):  # class 안의 함수에서 self은 class을 의미하고 obj은 admin에서 row을 의미
         return obj.amenities.count()
 
+    def count_photos(self, obj):
+        return obj.photos.count()
     # count_amenities.short_description = "hello sexy!"  # functionailty다. 장고에서 함수로 받아들인다
 
 
