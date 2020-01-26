@@ -94,6 +94,9 @@ class RoomAdmin(admin.ModelAdmin):
         "house_rules",
     )
 
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+
     def count_amenities(self, obj):  # class 안의 함수에서 self은 class을 의미하고 obj은 admin에서 row을 의미
         return obj.amenities.count()
 
