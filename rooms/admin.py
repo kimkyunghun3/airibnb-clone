@@ -75,6 +75,8 @@ class RoomAdmin(admin.ModelAdmin):
         "country",
     )
 
+    raw_id_fields = ("host",)
+
     ordering = ("name", "price", "bedrooms")
 
     search_fields = ("^city", "^host__username")
