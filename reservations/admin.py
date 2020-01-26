@@ -13,5 +13,3 @@ class ReservationAdmin(admin.ModelAdmin):
     )
 
     list_filter = ("status",)
-
-    search_fields = ("^name",)
