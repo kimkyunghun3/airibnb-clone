@@ -18,4 +18,6 @@ class Command(BaseCommand):
         number = options.get("number")
         seeder = Seed.seeder()
         all_users = user_models.User.objects.all()
-        room_types = room_models.RoomType.objects.all()
+        seedr.add_entity(room_models, Room, number)
+        seeder.execute()
+        self.stdout.write(self.style.SUCCESS(f"{number} rooms created!"))
