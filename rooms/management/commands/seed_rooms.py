@@ -21,3 +21,4 @@ class Command(BaseCommand):
         seedr.add_entity(room_models, Room, number)
         seeder.execute()
         self.stdout.write(self.style.SUCCESS(f"{number} rooms created!"))
+        self.stdout.write()
