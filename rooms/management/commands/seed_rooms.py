@@ -20,5 +20,5 @@ class Command(BaseCommand):
         all_users = user_models.User.objects.all()
         seedr.add_entity(room_models, Room, number)
         seeder.execute()
-        self.stdout.write(self.style.SUCCESS(f"{number} rooms created!"))
-        self.stdout.write(self.style=hello)
+        self.stdout.write(self.style.SUCCESS(f"{number} rooms created!!"))
+        self.stdout.write(self.style.FAILED)
